@@ -12,6 +12,7 @@
    Что передает и принимает:
     Обычно не содержит тела (payload), поскольку его основная цель - получить информацию о поддерживаемых методах и параметрах соединения.
     В ответе сервер может включать заголовки, такие как Allow (содержащий разрешенные методы), CORS-заголовки (в случае использования в контексте CORS) и другие метаданные, предоставляющие информацию о возможностях сервера.
+
 2. "HTTP" 3.0, ключевые особенности:
     - HTTP.3 использует протокол **QUIC** (Quick UDP Internet Connections) вместо TCP. QUIC интегрирует функциональность транспортного уровня и уровня приложения, что может улучшить производительность и безопасность.
     - В отличие от HTTP/1.x и HTTP/2, где мультиплексирование(**Frame Multiplexing**) осуществляется на уровне потоков, HTTP/3 внедряет мультиплексирование на уровне кадров, что может привести к более эффективной передаче данных. Клиент может отправлять несколько HTTP-запросов на сервер одновременно через одно и то же соединение. Аналогично, сервер может одновременно отвечать на эти запросы.
@@ -20,4 +21,67 @@
     - Протокол QUIC разработан с учетом улучшения производительности в мобильных сетях и сетях с высокой задержкой.
     - Использование UDP вместо TCP может сделать HTTP/3 более устойчивым к потере пакетов и плохим сетевым условиям. Сервер может заранее передавать ресурсы клиенту до того, как клиент явно запросит их. Эта функция снижает потребность в дополнительных двусторонних запросах, что приводит к ускорению загрузки страниц.
     - HTTP/3 продолжает поддерживать шифрование данных с использованием TLS, обеспечивая безопасную передачу информации.
-3. 
+
+3. Способы отмены запроса
+   **AbortController**
+   const controller = new AbortController();
+   const signal = controller.signal;
+   
+   fetch('https://example.com/data', { signal })
+     .then(response => response.json())
+     .catch(error => {
+       if (error.name === 'AbortError') {
+         console.log('Запрос был отменен');
+       } else {
+         console.error('Произошла ошибка', error);
+       }
+     });
+   
+   // Отмена запроса
+   controller.abort();
+   
+   **Timeout**(Установить таймаут для запроса, и если он превышен, отменить запрос)
+   const timeout = 5000; // 5 секунд
+   const controller = new AbortController();
+   const signal = controller.signal;
+   
+   const timeoutId = setTimeout(() => {
+     controller.abort();
+   }, timeout);
+   
+   fetch('https://example.com/data', { signal })
+     .then(response => response.json())
+     .catch(error => {
+       if (error.name === 'AbortError') {
+         console.log('Запрос был отменен из-за таймаута');
+       } else {
+         console.error('Произошла ошибка', error);
+       }
+     })
+     .finally(() => {
+       clearTimeout(timeoutId);
+     });
+4. Примеры создания примитивных значений
+   const str1 = 'Привет, мир!';
+   const str2 = new String('Это объект String');
+      const num1 = 42;
+      const num2 = new Number(3.14);
+   const bool1 = true;
+   const bool2 = new Boolean(false);
+      const nullValue1 = null;
+   let undefinedValue1;
+   const undefinedValue2 = undefined;
+      const symbol1 = Symbol('описание');
+   const bigInt1 = 9007199254740991n;
+   const bigInt2 = BigInt('12345678901234567890');
+
+5. Переменные, объявленные с использованием ключевых слов let и const, могут быть объявлены до момента фактического выполнения кода. Но, на этапе объявления переменные получают значение undefined, и попытка обращения к ним до их фактического объявления вызывает ошибку ReferenceError.
+6.
+   const res = "B" + "a" + (1 - "hello");
+   console.log(res); // BaNaN
+   
+   const res2 = (true && 3) + "d";
+   console.log(res2); // 3d
+   
+   const res3 = Boolean(true && 3) + "d";
+   console.log(res3); // trued
