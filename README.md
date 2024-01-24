@@ -14,9 +14,9 @@
   &ensp;  this.count = 1  
   }  
   class Counter {  
-    constructor() {  
-      this.count = 2  
-    }  
+  &ensp;  constructor() {  
+  &ensp;&ensp;    this.count = 2  
+  &ensp;  }  
   }  
   
 
@@ -31,25 +31,25 @@
 
 Задание 3 – Создать функцию makeCounter всеми описанными и возможными способами  
   const makeCounter = function() {  
-    return { count: 0 }  
+  &ensp;  return { count: 0 }  
   }  
   
   function makeCounter() {  
-    return { count: 0 }  
+  &ensp;  return { count: 0 }  
   }  
   
   const makeCounter = () => {return { count: 0 }};  
 
   const makeCounter = function makeCounter(){  
-    return { count: 0 }  
+  &ensp;  return { count: 0 }  
   }  
 
   function MakeCounter() {  
-    this.count = 0  
+  &ensp;  this.count = 0  
   }  
 
   (function makeCounter() {  
-    return { count: 0 }  
+  &ensp;  return { count: 0 }  
   })()  
 
 Бонус 1 – Написать функцию глубокого сравнения двух объектов:  
