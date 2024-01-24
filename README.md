@@ -11,7 +11,7 @@
   const counter = Object.assign({}, counter)  
   
   const ByFunctionCounter() {  
-    this.count = 1  
+  &ensp;  this.count = 1  
   }  
   class Counter {  
     constructor() {  
