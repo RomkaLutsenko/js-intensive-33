@@ -2,6 +2,7 @@
 # Домашнее задание №2
 
 Задание 1 – Создать объект counter всеми возможными способами
+
   const counter = {}
   const counter = new ByFunctionCounter()
   const counter = new Counter()
