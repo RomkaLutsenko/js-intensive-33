@@ -3,12 +3,12 @@
 
 Задание 1 – Создать объект counter всеми возможными способами
 
-  const counter = {}
-  const counter = new ByFunctionCounter()
-  const counter = new Counter()
-  const counter = Object.create(null)
-  const counter = Object.create({})
-  const counter = Object.assign({}, counter)
+  const counter = {}<br/>
+  const counter = new ByFunctionCounter()<br/>
+  const counter = new Counter()<br/>
+  const counter = Object.create(null)<br/>
+  const counter = Object.create({})<br/>
+  const counter = Object.assign({}, counter)<br/>
   
   const ByFunctionCounter() {
     this.count = 1
