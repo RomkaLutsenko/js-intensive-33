@@ -23,10 +23,11 @@
 Задание 2 – Скопировать объект counter всеми возможными способами  
   const counter = { count: 0 }  
   
-  const copiedCounter = { ...counter }  
-  const copiedCounter = Object.assign({}, counter)  
-  const copiedCounter = JSON.parse(JSON.stringify(counter))  
-  const copiedCounter = _.cloneDeep(counter)  
+  const copiedCounter1 = structuredClone(counter);
+  const copiedCounter2 = { ...counter }  
+  const copiedCounter3 = Object.assign({}, counter)  
+  const copiedCounter4 = JSON.parse(JSON.stringify(counter))  
+  const copiedCounter5 = _.cloneDeep(counter)  
 
 
 Задание 3 – Создать функцию makeCounter всеми описанными и возможными способами  
@@ -53,6 +54,20 @@
   })()  
 
 Бонус 1 – Написать функцию глубокого сравнения двух объектов:  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
